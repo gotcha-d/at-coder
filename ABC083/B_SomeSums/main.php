@@ -9,9 +9,12 @@ $max = (int) $inputs[2];
 $total = 0;
 for($i = 1; $i <= $value; $i++) {
     $sum = 0;
-    $digits = str_split((string) $i);
-    for($j = 0; $j < count($digits); $j++) {
-        $sum += (int) $digits[$j];
+    $target = $i;
+    // 各桁の和を求める
+    // 10進数を10で割った余りで下一桁を取得できる
+    while ($target > 0) {
+        $sum += (int) $target % 10;
+        $target = $target / 10;
     }
 
     if ($min <= $sum && $sum <= $max) {
