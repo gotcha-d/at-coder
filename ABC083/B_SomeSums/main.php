@@ -11,8 +11,8 @@ for($i = 1; $i <= $value; $i++) {
     $sum = 0;
     $target = $i;
     // 各桁の和を求める
-    // 10進数を10で割った余りで下一桁を取得できる
     while ($target > 0) {
+        // 10進数を10で割った余りで下一桁を取得できる
         $sum += (int) $target % 10;
         $target = $target / 10;
     }
