@@ -1,19 +1,16 @@
 <?php
 
-$inputs = [];
-while ($line = trim(fgets(STDIN))) {
-    $inputs[] = (int) $line;
-}
-
-$n = $inputs[0];
+$n = trim(fgets(STDIN));
 // バケットの作成
 $bucket = [];
-for ($i = 1; $i <= $n; $i++) {
-    $diameter = $inputs[$i];
-    if (isset($bucket[$diameter])) {
-        $bucket[$diameter] += 1;
-    } else {
-        $bucket[$diameter] = 1;
-    }
+for ($i = 0; $i < $n; $i++) {
+    $diameter = trim(fgets(STDIN));
+    // バケットの更新
+    $bucket[$diameter] = 1; // 今回の問題では、各種が何個ずつあるかは関係ないので1or0でいい
 }
-print_r(count($bucket) . PHP_EOL);
+
+$sum = 0;
+foreach ($bucket as $item) {
+    $sum += $item;
+}
+print_r($sum . PHP_EOL);
