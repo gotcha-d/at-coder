@@ -4,6 +4,7 @@ function getPercentage($x, $t) {
     if (abs($t) < 3) {
         return 0;
     }
+    // return ($x-2)/(abs($t) - 2);
     return fdiv(($x-2), abs($t) - 2);
     
 }
@@ -14,21 +15,30 @@ $length = count($chars);
 
 $maxPercentage = 0;
 for ($i = 0; $i < $length; $i++) {
-    for ($j = $i + 1; $j < $length; $j++) {
-        $nowLength = ($j - $i + 1);
-        if ($chars[$i] != "t" || $chars[$j] != "t" || $nowLength < 3) {
-            continue;
+    $t = $chars[$i];
+    $maxIndex = $i;
+    for ($j = $i+1; $j < $length; $j++) {
+        // tと囲まれている最長のインデックスまで走査
+        if ($t == $chars[$j]) {
+            $maxIndex = $j;
         }
-        $count = 0;
-        for ($k = $i + 1; $k < $j; $k++) {
-            if ($chars[$k] == "t") {
-                $count++;
-            }
-        }
-        $now = $count / ($nowLength -2);
-        $maxPercentage = max($maxPercentage, $now);
     }
 
+    // 同じ文字がなければ検証対象外
+    if ($i ==  $maxIndex) {
+        continue;
+    }
+
+    $candidate = implode(array_slice($chars, $i, $maxIndex - $i +1));
+    $targetChar = $chars[$i];
+    $x = substr_count($candidate, $targetChar);
+    $t = strlen($candidate);
+
+    // 長さが3以上で、両端の文字が2個以上ある場合のみ計算
+    if ($t >= 3 && $x >= 2) {
+        $percentage = ($x - 2) / ($t - 2);
+        $maxPercentage = max($maxPercentage, $percentage);
+    }
 }
 
 echo $maxPercentage;
