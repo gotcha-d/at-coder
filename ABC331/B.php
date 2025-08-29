@@ -2,9 +2,9 @@
 
 [$n, $s, $m, $l] = array_map('intval', explode(' ', fgets(STDIN)));
 
-$maxS = floor($n / 6);
-$maxM = floor($n / 8);
-$maxL = floor($n / 12);
+$maxS = ceil($n / 6);
+$maxM = ceil($n / 8);
+$maxL = ceil($n / 12);
 
 $ans = INF;
 for ($i = 0; $i <= $maxS; $i++) {
