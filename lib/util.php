@@ -1,10 +1,11 @@
 <?php
 
+// 通常
 $n = trim(fgets(STDIN));
 
 // 入力「A B」をそれぞれ変数a, bに代入する
-[$a, $b] = explode(' ', fgets(STDIN));
-[$a, $b] = array_map('intval', explode(' ', fgets(STDIN)));
+[$a, $b] = explode(' ', trim(fgets(STDIN)));
+[$a, $b] = array_map('intval', explode(' ', trim(fgets(STDIN))));
 
 // 盤の作成
 $boards = [];
