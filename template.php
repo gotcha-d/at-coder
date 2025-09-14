@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * 文字列の入力を受け付ける
+ *
+ * @return string
+ */
+function inputString(): string
+{
+    return trim(fgets(STDIN));
+}
+
+/**
+ * スペース区切りで入力された文字列を、各要素配列にして返す
+ *
+ * @return array
+ */
+function inputStringsArray(): array
+{
+    return explode(" ", trim(fgets(STDIN)));
+}
+
+/**
+ * スペース区切りで入力された整数を、各要素配列にして返す
+ *
+ * @return array
+ */
+function inputIntegers(): array
+{
+    return array_map("intval", explode(" ", trim(fgets(STDIN))));
+}
+
+/**
+ * 入力された文字列を1文字ずつの配列に分解する
+ */
+function inputStringSplit(): array
+{
+    return str_split(trim(fgets(STDIN)));
+}
