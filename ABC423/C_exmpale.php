@@ -1,0 +1,62 @@
+<?php
+
+// 上下左右への移動（下、右、上、左）を定義
+const DY = [1, 0, -1, 0];
+const DX = [0, 1, 0, -1];
+
+/**
+ * 文字列の入力を受け付ける
+ *
+ * @return string
+ */
+function inputString(): string
+{
+    return trim(fgets(STDIN));
+}
+
+/**
+ * スペース区切りで入力された文字列を、各要素配列にして返す
+ *
+ * @return array
+ */
+function inputStringsArray(): array
+{
+    return explode(" ", trim(fgets(STDIN)));
+}
+
+/**
+ * スペース区切りで入力された整数を、各要素配列にして返す
+ *
+ * @return array
+ */
+function inputIntegers(): array
+{
+    return array_map("intval", explode(" ", trim(fgets(STDIN))));
+}
+
+/**
+ * 入力された文字列を1文字ずつの配列に分解する
+ */
+function inputStringSplit(): array
+{
+    return str_split(trim(fgets(STDIN)));
+}
+
+[$n, $R] = inputIntegers();
+$locks = explode(" ", trim(fgets((STDIN))));
+$R--; // 部屋の初期位置の番号を-1減らす
+$l = $r = $R;
+for ($i=0; $i < $n; $i++) {
+    if ($locks[$i] == 1) {
+        continue;
+    }
+    $l = min($l, $i-1);
+    $r = max($r, $i);
+    // echo "L:" . $l . PHP_EOL;
+    // echo "R:" . $r . PHP_EOL;
+}
+$ans = 0;
+for ($i = $l+1; $i <= $r; $i++) {
+    $ans += $locks[$i] + 1;
+}
+echo $ans;
