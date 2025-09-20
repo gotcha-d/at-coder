@@ -9,7 +9,6 @@ function printLn($arg): void
     echo $arg.PHP_EOL;
 }
 
-
 /**
  * 文字列の入力を受け付ける
  *
@@ -19,6 +18,7 @@ function inputString(): string
 {
     return trim(fgets(STDIN));
 }
+
 
 /**
  * スペース区切りで入力された文字列を、各要素配列にして返す
@@ -47,3 +47,24 @@ function inputStringSplit(): array
 {
     return str_split(trim(fgets(STDIN)));
 }
+
+$n = (int) inputString();
+// $t = str_replace('x', '0', inputString());
+// $t = str_replace('o', '1', $t);
+// $a = str_replace('x', '0', inputString());
+// $a = str_replace('o', '1', $a);
+
+// $result = $t & $a;
+
+$t = inputStringSplit();
+$a = inputStringSplit();
+
+for ($i = 0; $i < $n; $i++) {
+    if ($t[$i] == "o" && $a[$i] == "o") {
+        printLn("Yes");
+        exit;
+    }
+}
+
+printLn(("No"));
+

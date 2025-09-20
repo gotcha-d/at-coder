@@ -42,6 +42,7 @@ function inputStringSplit(): array
     return str_split(trim(fgets(STDIN)));
 }
 
+
 [$n, $R] = inputIntegers();
 $locks = explode(" ", trim(fgets((STDIN))));
 $R--; // 部屋の初期位置の番号を-1減らす
