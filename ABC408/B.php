@@ -48,3 +48,19 @@ function inputStringSplit(): array
 {
     return str_split(trim(fgets(STDIN)));
 }
+
+[$n] = inputIntegers();
+$a = inputIntegers();
+
+$ans = [];
+for ($i = 0; $i < $n; $i++) {
+    if (isset($ans[$a[$i]])) {
+        continue;
+    }
+    $ans[$a[$i]] = true;
+}
+
+ksort($ans);
+
+printLn(count($ans));
+printLn(implode(" ", array_keys($ans)));
