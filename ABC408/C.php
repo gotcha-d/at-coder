@@ -47,3 +47,19 @@ function inputStringSplit(): array
 {
     return str_split(trim(fgets(STDIN)));
 }
+
+[$n, $m] = inputIntegers();
+// 城壁の初期配列
+$wall = array_fill(1, $n+1, 0);
+
+// いもす
+for ($i = 0; $i < $m; $i++) {
+    [$l, $r] = inputIntegers();
+    $wall[$l] += 1;
+    $wall[$r+1] -= 1;
+}
+for ($i = 1; $i <= $n; $i++) {
+    $wall[$i+1] += $wall[$i];
+}
+// print_r($wall);
+printLn(min(array_slice($wall, 0, $n)));
