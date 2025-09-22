@@ -48,19 +48,42 @@ function inputStringSplit(): array
     return str_split(trim(fgets(STDIN)));
 }
 
-[$n, $m] = inputIntegers();
-// 城壁の初期配列
-$wall = array_fill(1, $n+1, 0);
+[$n] = inputIntegers();
 
-// いもす
-for ($i = 0; $i < $m; $i++) {
-    [$l, $r] = inputIntegers();
-    $wall[$l] += 1;
-    $wall[$r+1] -= 1;
+$results = [];
+for ($i = 0; $i < $n; $i++) {
+    [$c, $p] = inputIntegers();
+    $results[$i] = [$c, $p];
 }
-print_r($wall);
-for ($i = 1; $i <= $n; $i++) {
-    $wall[$i+1] += $wall[$i];
+// print_r($results);
+
+// s[$c][$v] は、配列resultsの先頭Aからv個分の総和。$cはクラスごとにわけたもの
+// 累積和の1番目の要素は、配列resultsの先頭一個分の総和のこと
+$s = [
+    1 => [
+        0 => 0
+    ],
+    2 => [
+        0 => 0
+    ]
+];
+for ($i = 0; $i < $n; $i++) {
+    [$class, $score] = $results[$i];
+    if ($class == 1) {
+        $s[1][$i+1] = $s[1][$i] + $score;
+        $s[2][$i+1] = $s[2][$i];
+    } else {
+        $s[1][$i+1] = $s[1][$i];
+        $s[2][$i+1] = $s[2][$i] + $score;
+    }
 }
-// print_r($wall);
-printLn(min(array_slice($wall, 0, $n)));
+// print_r($s);
+
+[$q] = inputIntegers();
+for ($i = 0; $i < $q; $i++) {
+    [$a, $b] = inputIntegers();
+    $sum1 = $s[1][$b] - $s[1][$a-1];
+    $sum2 = $s[2][$b] - $s[2][$a-1];
+    printf("%d %d\n", $sum1, $sum2);
+}
+
